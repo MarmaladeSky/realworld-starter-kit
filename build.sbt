@@ -3,7 +3,12 @@ import sbtrelease.ReleaseStateTransformations._
 
 val Http4sVersion = "1.0.0-M41"
 val Http4sBlazeVersion = "1.0.0-M40"
-val CirceVersion = "0.14.1"
+val CatsVersion = "2.10.0"
+val CatsEffectVersion = "3.5.4"
+val CirceVersion = "0.14.6"
+val CirceOpticsVersion = "0.14.1"
+val CirceGenericVersion = "0.14.1"
+val Fs2Version = "3.9.4"
 val MunitVersion = "0.7.29"
 val LogbackVersion = "1.5.6"
 val MunitCatsEffectVersion = "1.0.7"
@@ -16,7 +21,11 @@ val ScalaLoggingVersion = "3.9.5"
 val Log4CatsVersion = "2.7.0"
 val PureConfigVersion = "0.17.6"
 val MockitoScalaVersion = "1.17.31"
+val Slf4jApiVersion = "2.0.13"
+val ShapelessVersion = "2.3.10"
 val TypelevelKindProjectorVersion = "0.13.3"
+val TypesafeConfigVersion = "1.4.3"
+val TypelevelCaseInsensitiveVersion = "1.4.0"
 val BetterMonadicForVersion = "0.3.1"
 val JAnsiVersion = "2.4.1"
 
@@ -31,15 +40,21 @@ lazy val root = (project in file("."))
     ),
     libraryDependencies ++= Seq(
       // Core
+      "org.typelevel" %% "cats-core" % CatsVersion,
+      "org.typelevel" %% "cats-kernel" % CatsVersion,
+      "org.typelevel" %% "cats-effect" % CatsEffectVersion,
+      "org.typelevel" %% "cats-effect-kernel" % CatsEffectVersion,
       "org.http4s" %% "http4s-core" % Http4sVersion,
+      "org.http4s" %% "http4s-server" % Http4sVersion,
       "org.http4s" %% "http4s-blaze-server" % Http4sBlazeVersion,
-      "org.http4s" %% "http4s-blaze-client" % Http4sBlazeVersion,
       "org.http4s" %% "http4s-circe" % Http4sVersion,
       "org.http4s" %% "http4s-dsl" % Http4sVersion,
-      "io.circe" %% "circe-generic" % CirceVersion,
-      "io.circe" %% "circe-generic-extras" % CirceVersion,
-      "ch.qos.logback" % "logback-classic" % LogbackVersion,
-      "org.scalameta" %% "svm-subs" % SvmSubsVersion,
+      "io.circe" %% "circe-core" % CirceVersion,
+      "io.circe" %% "circe-generic" % CirceGenericVersion,
+      "io.circe" %% "circe-generic-extras" % CirceGenericVersion,
+      "ch.qos.logback" % "logback-classic" % LogbackVersion % Runtime,
+      "co.fs2" %% "fs2-core" % Fs2Version,
+      "org.typelevel" %% "case-insensitive" % TypelevelCaseInsensitiveVersion,
 
       // Third-party misc
       "com.github.jwt-scala" %% "jwt-core" % JwtScalaVersion,
@@ -48,24 +63,33 @@ lazy val root = (project in file("."))
 
       // Slick
       "com.typesafe.slick" %% "slick" % SlickVersion,
-      "com.typesafe.slick" %% "slick-hikaricp" % SlickVersion,
+      "com.typesafe.slick" %% "slick-hikaricp" % SlickVersion % Runtime,
+      "com.github.tminglei" %% "slick-pg_core" % SlickPgVersion,
       "com.github.tminglei" %% "slick-pg" % SlickPgVersion,
       "com.typesafe.slick" %% "slick-codegen" % SlickVersion,
 
       // Logging
-      "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
+      "org.typelevel" %% "log4cats-core" % Log4CatsVersion,
       "org.typelevel" %% "log4cats-slf4j" % Log4CatsVersion,
-      "org.fusesource.jansi" % "jansi" % JAnsiVersion,
+      "org.slf4j" % "slf4j-api" % Slf4jApiVersion % Runtime,
+      "org.fusesource.jansi" % "jansi" % JAnsiVersion % Runtime,
+      "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
 
       // Config
-      "com.github.pureconfig" %% "pureconfig" % PureConfigVersion,
+      "com.typesafe" % "config" % TypesafeConfigVersion,
+      "com.github.pureconfig" %% "pureconfig-core" % PureConfigVersion,
+      "com.github.pureconfig" %% "pureconfig-generic" % PureConfigVersion,
+      "com.github.pureconfig" %% "pureconfig-generic-base" % PureConfigVersion,
 
       // Test
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
       "org.mockito" %% "mockito-scala" % MockitoScalaVersion % Test,
-      "io.circe" %% "circe-optics" % CirceVersion % Test
+      "io.circe" %% "circe-optics" % CirceOpticsVersion % Test
     ),
+    // dependency of many libraries, but not used in the project
+    undeclaredCompileDependenciesFilter -= moduleFilter("com.chuusai", "shapeless"),
+    undeclaredCompileDependenciesFilter -= moduleFilter("org.slf4j", "slf4j-api"),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % TypelevelKindProjectorVersion cross CrossVersion.full),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % BetterMonadicForVersion),
     Compile / run / fork := true,

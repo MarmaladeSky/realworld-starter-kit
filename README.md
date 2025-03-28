@@ -94,3 +94,13 @@ sbt clean compile 'slickPgGen localhost 5432 condoit condoit postgres postgres'
 
 # Fix compilation errors and add changes at business logic, routes and models
 ```
+
+### Tools
+Here's the list of tools I find useful in day to day work.
+
+### SBT Explicit Dependencies plugin
+The plugin to avoid dependency hell. A nice tool to have in your CI/CD pipeline.
+```shell
+sbt 'undeclaredCompileDependenciesTest; unusedCompileDependenciesTest'
+```
+~~~~
