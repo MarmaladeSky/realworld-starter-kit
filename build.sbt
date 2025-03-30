@@ -1,31 +1,32 @@
 import complete.DefaultParsers._
 import sbtrelease.ReleaseStateTransformations._
 
-val Http4sVersion = "1.0.0-M41"
-val Http4sBlazeVersion = "1.0.0-M40"
-val CatsVersion = "2.10.0"
-val CatsEffectVersion = "3.5.4"
-val CirceVersion = "0.14.6"
-val CirceOpticsVersion = "0.14.1"
-val CirceGenericVersion = "0.14.1"
-val Fs2Version = "3.9.4"
-val MunitVersion = "0.7.29"
-val LogbackVersion = "1.5.6"
+val Http4sVersion = "1.0.0-M44"
+val Http4sBlazeVersion = "1.0.0-M41"
+val CatsVersion = "2.13.0"
+val CatsEffectVersion = "3.6.0"
+val CirceVersion = "0.14.12"
+val CirceOpticsVersion = "0.15.0"
+val CirceGenericVersion = "0.14.12"
+val CirceGenericExtrasVersion = "0.14.4"
+val Fs2Version = "3.12.0"
+val MunitVersion = "1.1.0"
+val LogbackVersion = "1.5.18"
 val MunitCatsEffectVersion = "1.0.7"
-val SlickVersion = "3.5.1"
-val SlickPgVersion = "0.22.1"
+val SlickVersion = "3.6.0"
+val SlickPgVersion = "0.23.0"
 val SvmSubsVersion = "20.2.0"
-val JwtScalaVersion = "9.0.2"
-val SlugifyVersion = "3.0.6"
+val JwtScalaVersion = "10.0.4"
+val SlugifyVersion = "3.0.7"
 val ScalaLoggingVersion = "3.9.5"
 val Log4CatsVersion = "2.7.0"
-val PureConfigVersion = "0.17.6"
-val MockitoScalaVersion = "1.17.31"
-val Slf4jApiVersion = "2.0.13"
+val PureConfigVersion = "0.17.8"
+val MockitoScalaVersion = "1.17.37"
+val Slf4jApiVersion = "2.0.17"
 val ShapelessVersion = "2.3.10"
 val TypelevelKindProjectorVersion = "0.13.3"
 val TypesafeConfigVersion = "1.4.3"
-val TypelevelCaseInsensitiveVersion = "1.4.0"
+val TypelevelCaseInsensitiveVersion = "1.4.2"
 val BetterMonadicForVersion = "0.3.1"
 val JAnsiVersion = "2.4.1"
 
@@ -51,7 +52,7 @@ lazy val root = (project in file("."))
       "org.http4s" %% "http4s-dsl" % Http4sVersion,
       "io.circe" %% "circe-core" % CirceVersion,
       "io.circe" %% "circe-generic" % CirceGenericVersion,
-      "io.circe" %% "circe-generic-extras" % CirceGenericVersion,
+      "io.circe" %% "circe-generic-extras" % CirceGenericExtrasVersion,
       "ch.qos.logback" % "logback-classic" % LogbackVersion % Runtime,
       "co.fs2" %% "fs2-core" % Fs2Version,
       "org.typelevel" %% "case-insensitive" % TypelevelCaseInsensitiveVersion,
