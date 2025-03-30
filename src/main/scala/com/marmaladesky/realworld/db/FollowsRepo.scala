@@ -57,12 +57,6 @@ class FollowsRepo[F[_]: Async](db: Database, ec: ExecutionContext) {
     liftQ { q.transactionally }
   }
 
-  def getFollowers(master: Long): F[Seq[FollowsRow]] = {
-    val q = Tables.Follows.filter { r => r.masterId === master }.result
-
-    liftQ { q.transactionally }
-  }
-
   def getFollowed(slave: Long): F[Seq[FollowsRow]] = {
     val q = Tables.Follows.filter { r => r.slaveId === slave }.result
 
