@@ -10,6 +10,12 @@ project/plugins/project/
 .cache
 .lib/
 
+# Metals
+.bloop/
+project/.bloop/
+project/metals.sbt
+project/project/
+
 ### Scala ###
 *.class
 *.log
