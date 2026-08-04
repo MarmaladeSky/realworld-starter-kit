@@ -23,7 +23,7 @@ object RealWorldServer {
 
   private val DbExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
 
-  private def app[F[_]: Async: LoggerFactory](db: Database): F[HttpApp[F]] = {
+  private def app[F[_]: Async: LoggerFactory](db: Database): HttpApp[F] = {
     val usersRepo = new UsersRepo[F](db, DbExecutionContext)
     val followsRepo = new FollowsRepo[F](db, DbExecutionContext)
 
@@ -51,24 +51,23 @@ object RealWorldServer {
       .withAllowMethodsIn(Set(Method.GET, Method.POST, Method.PUT, Method.DELETE))
       .withMaxAge(3.days)
 
-    corsPolicy(httpApp).map { app =>
-      Logger.httpApp(logHeaders = true, logBody = false)(app)
+    val requestLogger = LoggerFactory[F].getLogger
+
+    Logger.httpApp(logHeaders = true, logBody = false, logAction = Some(requestLogger.info(_: String))) {
+      corsPolicy(httpApp)
     }
   }
 
   def stream[F[_]: Async](db: Database, config: AppConfig): fs2.Stream[F, ExitCode] = {
     implicit val logging: LoggerFactory[F] = Slf4jFactory.create[F]
 
-    for {
-      app <- fs2.Stream.eval(app(db))
-      errorHandler = new DefaultErrorHandler[F]
-      stream <- BlazeServerBuilder[F]
-        .bindHttp(config.http.port, config.http.host)
-        .withHttpApp(app)
-        .withServiceErrorHandler(errorHandler)
-        .serve
-    } yield stream
+    val errorHandler = new DefaultErrorHandler[F]
 
+    BlazeServerBuilder[F]
+      .bindHttp(config.http.port, config.http.host)
+      .withHttpApp(app(db))
+      .withServiceErrorHandler(errorHandler)
+      .serve
   }
 
 }

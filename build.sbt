@@ -1,8 +1,8 @@
 import complete.DefaultParsers._
 import sbtrelease.ReleaseStateTransformations._
 
-val Http4sVersion = "1.0.0-M44"
-val Http4sBlazeVersion = "1.0.0-M41"
+val Http4sVersion = "0.23.30"
+val Http4sBlazeVersion = "0.23.17"
 val CatsVersion = "2.13.0"
 val CatsEffectVersion = "3.6.0"
 val CirceVersion = "0.14.12"
@@ -12,7 +12,7 @@ val CirceGenericExtrasVersion = "0.14.4"
 val Fs2Version = "3.12.0"
 val MunitVersion = "1.1.0"
 val LogbackVersion = "1.5.18"
-val MunitCatsEffectVersion = "1.0.7"
+val MunitCatsEffectVersion = "2.1.0"
 val SlickVersion = "3.6.0"
 val SlickPgVersion = "0.23.0"
 val SvmSubsVersion = "20.2.0"
@@ -84,7 +84,7 @@ lazy val root = (project in file("."))
 
       // Test
       "org.scalameta" %% "munit" % MunitVersion % Test,
-      "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
+      "org.typelevel" %% "munit-cats-effect" % MunitCatsEffectVersion % Test,
       "org.mockito" %% "mockito-scala" % MockitoScalaVersion % Test,
       "io.circe" %% "circe-optics" % CirceOpticsVersion % Test
     ),
