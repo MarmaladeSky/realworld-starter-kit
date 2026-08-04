@@ -1,34 +1,33 @@
 import complete.DefaultParsers._
 import sbtrelease.ReleaseStateTransformations._
 
-val Http4sVersion = "0.23.30"
-val Http4sBlazeVersion = "0.23.17"
-val CatsVersion = "2.13.0"
+val BetterMonadicForVersion = "0.3.1"
 val CatsEffectVersion = "3.6.0"
-val CirceVersion = "0.14.12"
-val CirceOpticsVersion = "0.15.0"
-val CirceGenericVersion = "0.14.12"
+val CatsVersion = "2.13.0"
 val CirceGenericExtrasVersion = "0.14.4"
+val CirceGenericVersion = "0.14.12"
+val CirceOpticsVersion = "0.15.0"
+val CirceVersion = "0.14.12"
 val Fs2Version = "3.12.0"
-val MunitVersion = "1.1.0"
-val LogbackVersion = "1.5.18"
-val MunitCatsEffectVersion = "2.1.0"
-val SlickVersion = "3.6.0"
-val SlickPgVersion = "0.23.0"
-val SvmSubsVersion = "20.2.0"
+val Http4sBlazeVersion = "0.23.17"
+val Http4sVersion = "0.23.30"
+val JAnsiVersion = "2.4.1"
 val JwtScalaVersion = "10.0.4"
-val SlugifyVersion = "3.0.7"
-val ScalaLoggingVersion = "3.9.5"
 val Log4CatsVersion = "2.7.0"
-val PureConfigVersion = "0.17.8"
+val LogbackVersion = "1.5.18"
 val MockitoScalaVersion = "1.17.37"
+val MunitCatsEffectVersion = "2.1.0"
+val MunitVersion = "1.1.0"
+val PureConfigVersion = "0.17.8"
+val ScalaLoggingVersion = "3.9.5"
+val ShapelessVersion = "2.3.13"
 val Slf4jApiVersion = "2.0.17"
-val ShapelessVersion = "2.3.10"
+val SlickPgVersion = "0.23.0"
+val SlickVersion = "3.6.0"
+val SlugifyVersion = "3.0.7"
+val TypelevelCaseInsensitiveVersion = "1.4.2"
 val TypelevelKindProjectorVersion = "0.13.3"
 val TypesafeConfigVersion = "1.4.3"
-val TypelevelCaseInsensitiveVersion = "1.4.2"
-val BetterMonadicForVersion = "0.3.1"
-val JAnsiVersion = "2.4.1"
 
 lazy val root = (project in file("."))
   .settings(
@@ -53,6 +52,7 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-core" % CirceVersion,
       "io.circe" %% "circe-generic" % CirceGenericVersion,
       "io.circe" %% "circe-generic-extras" % CirceGenericExtrasVersion,
+      "com.chuusai" %% "shapeless" % ShapelessVersion,
       "ch.qos.logback" % "logback-classic" % LogbackVersion % Runtime,
       "co.fs2" %% "fs2-core" % Fs2Version,
       "org.typelevel" %% "case-insensitive" % TypelevelCaseInsensitiveVersion,
@@ -72,7 +72,7 @@ lazy val root = (project in file("."))
       // Logging
       "org.typelevel" %% "log4cats-core" % Log4CatsVersion,
       "org.typelevel" %% "log4cats-slf4j" % Log4CatsVersion,
-      "org.slf4j" % "slf4j-api" % Slf4jApiVersion % Runtime,
+      "org.slf4j" % "slf4j-api" % Slf4jApiVersion,
       "org.fusesource.jansi" % "jansi" % JAnsiVersion % Runtime,
       "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
 
@@ -88,9 +88,6 @@ lazy val root = (project in file("."))
       "org.mockito" %% "mockito-scala" % MockitoScalaVersion % Test,
       "io.circe" %% "circe-optics" % CirceOpticsVersion % Test
     ),
-    // dependency of many libraries, but not used in the project
-    undeclaredCompileDependenciesFilter -= moduleFilter("com.chuusai", "shapeless"),
-    undeclaredCompileDependenciesFilter -= moduleFilter("org.slf4j", "slf4j-api"),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % TypelevelKindProjectorVersion cross CrossVersion.full),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % BetterMonadicForVersion),
     Compile / run / fork := true,
