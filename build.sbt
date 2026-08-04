@@ -2,38 +2,38 @@ import complete.DefaultParsers._
 import sbtrelease.ReleaseStateTransformations._
 
 val BetterMonadicForVersion = "0.3.1"
-val CatsEffectVersion = "3.6.0"
+val CatsEffectVersion = "3.7.0"
 val CatsVersion = "2.13.0"
 val CirceGenericExtrasVersion = "0.14.4"
-val CirceGenericVersion = "0.14.12"
-val CirceOpticsVersion = "0.15.0"
-val CirceVersion = "0.14.12"
-val Fs2Version = "3.12.0"
-val Http4sBlazeVersion = "0.23.17"
-val Http4sVersion = "0.23.30"
-val JAnsiVersion = "2.4.1"
-val JwtScalaVersion = "10.0.4"
-val Log4CatsVersion = "2.7.0"
-val LogbackVersion = "1.5.18"
-val MockitoScalaVersion = "1.17.37"
-val MunitCatsEffectVersion = "2.1.0"
-val MunitVersion = "1.1.0"
-val PureConfigVersion = "0.17.8"
-val ScalaLoggingVersion = "3.9.5"
+val CirceGenericVersion = "0.14.16"
+val CirceOpticsVersion = "0.15.1"
+val CirceVersion = "0.14.16"
+val Fs2Version = "3.13.0"
+val Http4sBlazeVersion = "0.23.18"
+val Http4sVersion = "0.23.36"
+val JAnsiVersion = "2.4.3"
+val JwtScalaVersion = "11.0.4"
+val Log4CatsVersion = "2.8.0"
+val LogbackVersion = "1.6.1"
+val MockitoScalaVersion = "2.2.3"
+val MunitCatsEffectVersion = "2.2.0"
+val MunitVersion = "1.3.4"
+val PureConfigVersion = "0.17.10"
+val ScalaLoggingVersion = "3.9.6"
 val ShapelessVersion = "2.3.13"
-val Slf4jApiVersion = "2.0.17"
-val SlickPgVersion = "0.23.0"
-val SlickVersion = "3.6.0"
-val SlugifyVersion = "3.0.7"
-val TypelevelCaseInsensitiveVersion = "1.4.2"
-val TypelevelKindProjectorVersion = "0.13.3"
-val TypesafeConfigVersion = "1.4.3"
+val Slf4jApiVersion = "2.0.18"
+val SlickPgVersion = "0.23.1"
+val SlickVersion = "3.6.1"
+val SlugifyVersion = "4.0.1"
+val TypelevelCaseInsensitiveVersion = "1.5.0"
+val TypelevelKindProjectorVersion = "0.13.4"
+val TypesafeConfigVersion = "1.4.9"
 
 lazy val root = (project in file("."))
   .settings(
     organization := "com.marmaladesky",
     name := "condoit",
-    scalaVersion := "2.13.14",
+    scalaVersion := "2.13.18",
     scalacOptions ++= Seq(
       "-Ymacro-annotations",
       """-Wconf:src=.*gen\/Tables\.scala:silent"""
